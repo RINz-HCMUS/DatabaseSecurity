@@ -161,7 +161,8 @@ def view_class_students(malop):
         cursor = conn.cursor()
         cursor.execute("SELECT MASV, HOTEN, CONVERT(varchar, NGAYSINH, 23), DIACHI FROM SINHVIEN WHERE MALOP = ?", (malop,))
         for row in cursor.fetchall():
-            tree.insert("", "end", values=row)
+            print(row)
+            tree.insert("", "end", values=(row[0], row[1], row[2], row[3]))
         conn.close()
 
 def edit_class(malop):
@@ -280,7 +281,8 @@ def manage_students():
         cursor = conn.cursor()
         cursor.execute("SELECT MALOP, TENLOP FROM LOP WHERE MANV = ?", (current_manv,))
         for row in cursor.fetchall():
-            tree.insert("", "end", values=row)
+            print(row)
+            tree.insert("", "end", values=(row[0], row[1]))
         conn.close()
 
     btn_frame = ttk.Frame(student_win)
@@ -326,7 +328,8 @@ def view_students_of_class(malop):
         cursor = conn.cursor()
         cursor.execute("SELECT MASV, HOTEN, CONVERT(varchar, NGAYSINH, 23), DIACHI FROM SINHVIEN WHERE MALOP = ?", (malop,))
         for row in cursor.fetchall():
-            tree.insert("", "end", values=row)
+            print(row)
+            tree.insert("", "end", values=(row[0], row[1], row[2], row[3]))
         conn.close()
 
     btn_frame = ttk.Frame(win)
@@ -493,7 +496,8 @@ def manage_grades():
         try:
             cursor.execute("EXEC SP_SEL_PUBLIC_BANGDIEM ?, ?", (current_manv, current_password))
             for row in cursor.fetchall():
-                tree.insert("", "end", values=row)
+                print(row)
+                tree.insert("", "end", values=(row[0], row[1], row[2], row[3], row[4]))
         except Exception as e:
             messagebox.showerror("Lỗi", f"Không thể truy vấn bảng điểm: {e}")
         conn.close()
